@@ -4,13 +4,13 @@ import { Input } from "@/components/ui/input";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useRef, useState } from "react";
-import { PiSealQuestionThin } from "react-icons/pi";
+
 import { useToast } from "@/components/ui/use-toast";
 import { stripIndent, oneLine } from "common-tags";
 import { Icons } from "./ui/icons";
 import { ScrollArea } from "./ui/scroll-area";
-import dynamic from "next/dynamic";
-import { deleteChat, getAllmessages } from "@/lib/utils";
+
+import { getAllmessages } from "@/lib/utils";
 import Newchat from "./NewChat";
 
 export default function Search({ allchats }) {
@@ -180,7 +180,9 @@ export default function Search({ allchats }) {
   async function deleteChat(chatId: string) {
     try {
       console.log("all chats before", new_allchats);
-      setAllchats((prevChats) => prevChats.filter((obj) => obj.id !== chatId));
+      setAllchats((prevChats) =>
+        prevChats.filter((obj: any) => obj.id !== chatId)
+      );
       console.log("all chats after", new_allchats);
       if (!chatId) {
         return null;
@@ -208,7 +210,7 @@ export default function Search({ allchats }) {
             <div className="text-xl font-bold text-white">Dashboard</div>
             <Newchat active={!chatId} onSelect={onSelect} />
             {new_allchats &&
-              new_allchats.map((obj) => (
+              new_allchats.map((obj: any) => (
                 <>
                   {ChatListItem ? (
                     <ChatListItem

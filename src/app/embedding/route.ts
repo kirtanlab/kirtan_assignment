@@ -1,3 +1,4 @@
+import supabaseServer from "@/supabaseServer";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
@@ -8,8 +9,7 @@ const openai = new OpenAI({
 });
 
 export async function POST(req: Request) {
-  const supabase = createServerComponentClient({ cookies });
-  const { data } = await supabase.auth.getSession();
+  const { data } = await supabaseServer().auth.getSession();
 
   if (!data.session) {
     return NextResponse.json({ message: "Unauthorize" }, { status: 403 });

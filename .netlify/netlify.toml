@@ -1,0 +1,33 @@
+headers = []
+redirects = []
+
+[functions]
+
+[functions."*"]
+
+[[plugins]]
+package = "@netlify/plugin-nextjs"
+origin = "ui"
+
+[plugins.inputs]
+
+[build]
+publish = "/home/kirtan/Documents/supabase-chat-gpt-main/.next"
+publishOrigin = "ui"
+command = "npm run build"
+commandOrigin = "ui"
+
+[build.environment]
+NEXT_PRIVATE_TARGET = "server"
+
+[build.processing]
+
+[build.processing.css]
+
+[build.processing.html]
+
+[build.processing.images]
+
+[build.processing.js]
+
+[build.services]

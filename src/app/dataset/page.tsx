@@ -4,17 +4,16 @@ import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { BsDatabase } from "react-icons/bs";
 import Form from "./components/Form";
+import supabaseServer from "@/supabaseServer";
 
 export default async function Page() {
-  const supabase = createServerComponentClient({ cookies });
-
-  const { data } = await supabase.auth.getSession();
+  const { data } = await supabaseServer().auth.getSession();
 
   if (!data.session) {
     return redirect("/auth");
   }
 
-  const { data: user } = await supabase
+  const { data: user } = await supabaseServer()
     .from("users")
     .select("role")
     .eq("id", data.session.user.id)
@@ -27,7 +26,7 @@ export default async function Page() {
       <div className="w-full p-5 space-y-3">
         <div className="flex items-center gap-2">
           <BsDatabase className="w-5 h-5" />
-          <h1>"Daily AI dataset"</h1>
+          <h1>Daily AI dataset</h1>
         </div>
         <Form />
       </div>

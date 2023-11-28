@@ -4,11 +4,10 @@ import { redirect } from "next/navigation";
 import React from "react";
 import Search from "@/components/Search";
 import { createNewChat, getAllChats } from "./lib/utils";
+import supabaseServer from "./supabaseServer";
 
 export default async function Page() {
-  const supabase = createServerComponentClient({ cookies });
-
-  const { data } = await supabase.auth.getSession();
+  const { data } = await supabaseServer().auth.getSession();
 
   if (!data.session) {
     return redirect("/auth");
