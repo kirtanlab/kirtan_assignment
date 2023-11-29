@@ -203,7 +203,7 @@ export default function Search({ allchats }) {
     }
   }
   return (
-    div className="root">
+    <div className="root">
       <div className="flex flex-col sm:flex-row">
         <ScrollArea>
           <div className="flex flex-col h-screen sm:w-52 px-2 py-7 bg-black shadow border-r items-center">
