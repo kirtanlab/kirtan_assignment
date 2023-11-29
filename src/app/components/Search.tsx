@@ -64,7 +64,7 @@ export default function Search({ allchats }) {
   const handleSearch = async () => {
     setLoading(true);
     const searchText = inputRef.current.value;
-
+    clearInput()
     if (searchText && searchText.trim()) {
       setQuestion((currentQuestion) => [...currentQuestion, searchText]);
       try {
