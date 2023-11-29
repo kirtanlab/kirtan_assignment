@@ -198,6 +198,7 @@ export default function Search({ allchats }) {
           );
           setQuestion([])
           setAnswer([])
+          setChatId("")
           return status;
         });
     } catch (e) {
