@@ -16,8 +16,7 @@ export default async function Page() {
   const allChats = await getAllChats(data.session.user.id);
 
   return (
-    <div className="h-screen w-screen flex items-center">
+   
       <Search allchats={allChats} />
-    </div>
   );
 }
