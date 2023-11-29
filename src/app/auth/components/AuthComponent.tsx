@@ -39,7 +39,7 @@ export default function AuthComponent() {
       supabase.auth.signInWithOAuth({
         provider: "google",
         options: {
-          redirectTo: location.origin + "/auth/callback",
+          redirectTo: "https://singular-creponne-6ac827.netlify.app/auth/auth/callback",
         },
       });
     };
