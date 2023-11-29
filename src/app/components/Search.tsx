@@ -180,9 +180,7 @@ export default function Search({ allchats }) {
   async function deleteChat(chatId: string) {
     try {
       console.log("all chats before", new_allchats);
-      setAllchats((prevChats) =>
-        prevChats.filter((obj: any) => obj.id !== chatId)
-      );
+      
       console.log("all chats after", new_allchats);
       if (!chatId) {
         return null;
@@ -195,6 +193,11 @@ export default function Search({ allchats }) {
           // Assuming response is an object with properties like [[PromiseState]] and [[PromiseResult]]
           const { data, error, status } = response;
           console.log("delete chat", status);
+          setAllchats((prevChats) =>
+            prevChats.filter((obj: any) => obj.id !== chatId)
+          );
+          setQuestion([])
+          setAnswer([])
           return status;
         });
     } catch (e) {
