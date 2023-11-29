@@ -203,19 +203,18 @@ export default function Search({ allchats }) {
     }
   }
   return (
-    <div className="root">
-      <div className="flex flex-row">
+    div className="root">
+      <div className="flex flex-col sm:flex-row">
         <ScrollArea>
-          <div className="flex flex-col h-screen px-2 py-7 bg-black shadow border-r items-center w-52 ">
+          <div className="flex flex-col h-screen sm:w-52 px-2 py-7 bg-black shadow border-r items-center">
             <div className="text-xl font-bold text-white">Dashboard</div>
             <Newchat active={!chatId} onSelect={onSelect} />
             {new_allchats &&
               new_allchats.map((obj: any) => (
-                <>
+                <React.Fragment key={obj.id}>
                   {ChatListItem ? (
                     <ChatListItem
                       chat={obj}
-                      key={obj.id}
                       toastError={toastError}
                       onDelete={deleteChat}
                       toastSuccess={toastSuccess}
@@ -225,59 +224,58 @@ export default function Search({ allchats }) {
                   ) : (
                     <></>
                   )}
-                </>
+                </React.Fragment>
               ))}
           </div>
         </ScrollArea>
-
-        <div className="flex flex-col container w-screen  px-5 py-5 max-w-screen-xl justify-between">
-          <div className=" h-80vh overflow-y-auto space-y-10 ">
-            <div className="flex items-center justify-between border-b pb-3 ">
-              <div className="flex justify-start items-center gap-2">
-                <Icons.apple className="w-7 h-7" />
-                <h1 className="text-xl font-medium mt-1">Apple.ai</h1>
-              </div>
-              <Button onClick={handleLogout} className="justify-end">
-                Logout
-              </Button>
+        <div className="flex flex-col flex-1 px-5 py-5 max-w-screen-xl ">
+          <div className="sm:h-20 flex mt-3 justify-between  ">
+            <div className="flex   gap-2">
+              <Icons.apple className="w-7 h-7" />
+              <h1 className="text-xl font-medium mt-1">Apple.ai</h1>
             </div>
-            {!chatId &&
-              questions.length == 0 &&
-              answers.length == 0 &&
-              !loading && (
-                <div className="items-center justify-center text-2xl font-semibold text-gray-800">
-                  Welcome to the world of Apple !
-                  <br />
-                  How can I help you today? ...
-                </div>
-              )}
-            <ScrollArea>
-              {questions.map((question, index) => {
-                const answer = answers[index];
-                console.log("answer", answer);
-                const isLoading = loading && !answer;
-
-                return (
-                  <div className="space-y-3" key={index}>
-                    <div className="flex items-center gap-2 text-indigo-500">
-                      <Icons.user className="w-5 h-5" />
-                      <h1 className="text-black font-bold">{question}</h1>
-                    </div>
-                    {isLoading ? (
-                      <h1>Loading...</h1>
-                    ) : (
-                      <p className="text-black">{answer}</p>
-                    )}
-                  </div>
-                );
-              })}
-            </ScrollArea>
+            <Button
+              onClick={handleLogout}
+              className="justify-end w-fit h-7 mt-2"
+            >
+              Logout
+            </Button>
           </div>
+          {!chatId &&
+            questions.length === 0 &&
+            answers.length === 0 &&
+            !loading && (
+              <div className="flex-1 flex items-center justify-center text-2xl font-semibold text-gray-800">
+                Welcome to the world of Apple! <br /> How can I help you today?
+                ...
+              </div>
+            )}
+          <ScrollArea>
+            {questions.map((question, index) => {
+              const answer = answers[index];
+              ``;
+              const isLoading = loading && !answer;
+
+              return (
+                <div className="space-y-3" key={index}>
+                  <div className="flex items-center gap-2 text-indigo-500">
+                    <Icons.user className="w-5 h-5" />
+                    <h1 className="text-black font-bold">{question}</h1>
+                  </div>
+                  {isLoading ? (
+                    <h1>Loading...</h1>
+                  ) : (
+                    <p className="text-black">{answer}</p>
+                  )}
+                </div>
+              );
+            })}
+          </ScrollArea>
 
           <Input
             ref={inputRef}
             placeholder="Ask questions related to Apple products ..."
-            className="p-5"
+            className="p-5 mt-auto"
             onKeyDown={(e) => {
               if (e.key === "Enter") {
                 handleSearch();
