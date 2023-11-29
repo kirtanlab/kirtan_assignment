@@ -16,7 +16,11 @@ export default function RootLayout({
 	children: React.ReactNode;
 }) {
 	return (
-		<html lang="en">
+		<html lang="en" >
+			<meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+      ></meta>
 			<body className={inter.className}>
 				{children} <Toaster />
 			</body>
